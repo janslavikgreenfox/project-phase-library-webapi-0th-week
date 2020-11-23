@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace LibraryWebApi.Models.Entities
 {
-    public class Cathegory
+    public class AuthorizationLevel
     {
         [Key]
         public int Id { get; set; }
-        public string Description { get; set; }
+        public string Name { get; set; }
 
-        List<Book> WhichBelongsTo { get; set; }
+        List<Account> WhoHasTheLevel { get; set; }
 
-        public Cathegory()
+        public AuthorizationLevel()
         {
-            WhichBelongsTo = new List<Book>();
+            WhoHasTheLevel = new List<Account>();
         }
     }
 }
