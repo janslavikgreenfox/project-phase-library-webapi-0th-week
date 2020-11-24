@@ -28,6 +28,13 @@ namespace LBS2
               (builder =>
                    builder.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTION_STRING"))
               );
+
+            //In case of migration
+
+            //services.AddDbContext<ApplicationDbContext>
+            //    (builder =>
+            //        builder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Database=LBS2DB;Trusted_Connection=True")
+            //    );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
