@@ -12,7 +12,7 @@ namespace LibraryWebApi.Models.Entities
         public int Id { get; set; }
         public string Name { get; set; }
 
-        List<Account> WhoHasTheLevel { get; set; }
+        public List<Account> WhoHasTheLevel { get; set; }
 
         public AuthorizationLevel()
         {

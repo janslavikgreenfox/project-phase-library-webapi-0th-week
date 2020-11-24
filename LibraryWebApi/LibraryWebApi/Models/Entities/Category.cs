@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace LibraryWebApi.Models.Entities
 {
-    public class Cathegory
+    public class Category
     {
         [Key]
         public int Id { get; set; }
         public string Description { get; set; }
 
-        List<Book> WhichBelongsTo { get; set; }
+        public List<CategorizationEvent> Events { get; set; }
 
-        public Cathegory()
+        public Category()
         {
-            WhichBelongsTo = new List<Book>();
+            //WhichBelongsTo = new List<Book>();
+            Events = new List<CategorizationEvent>();
         }
     }
 }

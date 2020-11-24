@@ -12,14 +12,11 @@ namespace LibraryWebApi.Models.Entities
         public int Id { get; set; }
         public DateTime When { get; set; }
 
-        public int WhoId { get; set; }
-        public Account Who { get; set; }
-
         public int WhatId { get; set; }
         public Book What { get; set; }
 
-        public int CathegoryId { get; set; }
-        public Cathegory CathegorizeAs { get; set; }
+        public int CategoryId { get; set; }
+        public Category CategorizeAs { get; set; }
 
 
     }

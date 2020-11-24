@@ -16,7 +16,11 @@ namespace LibraryWebApi.Models.Entities
         public int AccountId { get; set; }
         public Account WhomLent { get; set; }
 
-        public int CathegoryId { get; set; }
-        public Cathegory WhatCathegory { get; set; }
+        public List<CategorizationEvent> Categorized { get; set; }
+
+        public Book()
+        {
+            Categorized = new List<CategorizationEvent>();
+        }
     }
 }

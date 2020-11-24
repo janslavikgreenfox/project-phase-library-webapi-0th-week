@@ -12,14 +12,17 @@ namespace LibraryWebApi.Models.Entities
         public int Id { get; set; }
         public string  Name { get; set; }
 
-        List<Book> BorrowedBooks { get; set; }
+        public List<Book> BorrowedBooks { get; set; }
 
         public int AuthorizationId { get; set; }
         public AuthorizationLevel AuthorizationLevel { get; set; }
 
+        //public List<CategorizationEvent> CategorizedEvents { get; set; }
+
         public Account()
         {
             BorrowedBooks = new List<Book>();
+            //CategorizedEvents = new List<CategorizationEvent>();
         }
     
     }
