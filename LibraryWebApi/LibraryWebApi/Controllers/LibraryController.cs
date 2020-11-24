@@ -14,6 +14,8 @@ namespace LibraryWebApi.Controllers
         {
             this.dbContext = dbContext;
         }
+        
+        [HttpGet("")]
         public IActionResult Index()
         {
             return View();

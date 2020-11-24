@@ -17,33 +17,31 @@ namespace LibraryWebApi.Databases
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
+           
             CategoriesTable.Add(new Category { Description = "Sci-fi" });
             CategoriesTable.Add(new Category { Description = "History" });
 
             AuthorizationLevelsTable.Add(new AuthorizationLevel { Name = "Admin" });
             AuthorizationLevelsTable.Add(new AuthorizationLevel { Name = "Librarian" });
             AuthorizationLevelsTable.Add(new AuthorizationLevel { Name = "User" });
+            SaveChanges();
             var librarian = AuthorizationLevelsTable.Where(x => x.Name == "Librarian").FirstOrDefault();
             var user = AuthorizationLevelsTable.Where(x => x.Name == "User").FirstOrDefault();
+
+            user.WhoHasTheLevel.Add(new Account { Name = "Alice" });
+            user.WhoHasTheLevel.Add(new Account { Name = "Bob" });
+            user.WhoHasTheLevel.Add(new Account { Name = "Cecilia" });
             SaveChanges();
 
-            AccountsTable.Add(new Account { Name = "Alice" });
-            AccountsTable.Add(new Account { Name = "Bob" });
-            AccountsTable.Add(new Account { Name = "Cecilia" });
+            var servadac = new Book { Title = "Hector Servadac", WhenLent = DateTime.Now };
             var alice = AccountsTable.Where(x => x.Name == "Alice").FirstOrDefault();
-            user.WhoHasTheLevel.Add(alice);
+            alice.BorrowedBooks.Add(servadac);
             SaveChanges();
 
-            BooksTable.Add(new Book { Title = "Hector Servadac", WhenLent = DateTime.Now });
-            var servadac = BooksTable.Where(x => x.Title == "Hector Servadac").FirstOrDefault();
-
-            CategoriesTable.Add(new Category { Description = "Scifi" });
-            var scifi = CategoriesTable.Where(x => x.Description == "Scifi").FirstOrDefault();
+            var scifi = CategoriesTable.Where(x => x.Description == "Sci-fi").FirstOrDefault();
 
             var now = DateTime.Now;
-            CategorizationEventsTable.Add(new CategorizationEvent { When = now });
-            var catEvent = CategorizationEventsTable.Where(x=>x.When.Equals(now)).FirstOrDefault();
-
+            var catEvent = new CategorizationEvent { When = now };
             scifi.Events.Add(catEvent);
             servadac.Categorized.Add(catEvent);
             SaveChanges();

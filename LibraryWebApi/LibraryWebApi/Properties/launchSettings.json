@@ -12,6 +12,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
+        "CONNECTION_STRING": "Server=(localdb)\\MSSQLLocalDB;Database=LibraryBookingSystemDB;Trusted_Connection=True",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

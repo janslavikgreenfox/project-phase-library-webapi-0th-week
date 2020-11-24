@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Models\ViewModels\" />
-    <Folder Include="Services\Interfaces\" />
     <Folder Include="Views\" />
     <Folder Include="wwwroot\Assets\" />
     <Folder Include="wwwroot\css\" />
