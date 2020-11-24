@@ -27,18 +27,18 @@ namespace LibraryWebApi
         {
             services.AddControllersWithViews();
 
-            var connection = Environment.GetEnvironmentVariable("CONNECTION_STRING");
-            //"Data Source=(localdb)\\MSSQLLocalDB;Database=LibraryBookingSystemDB;Trusted_Connection=True"
-            services.AddDbContext<ApplicationDbContext>
-              (builder =>
-                   builder.UseSqlServer(connection)
-              );
-
             services.AddTransient<IAccount, AccountService>();
             services.AddTransient<IAuthorizationLevel, AuthorizationLevelService>();
             services.AddTransient<IBook, BookService>();
-            services.AddTransient<ICategorizationEvent, CategorizationEventSevice>();
+            services.AddTransient<ICategorizationEvent, CategorizationEventService>();
             services.AddTransient<ICategory, CategoryService>();
+
+            //var connection = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+            //"Data Source=(localdb)\\MSSQLLocalDB;Database=LibraryBookingSystemDB;Trusted_Connection=True"
+            services.AddDbContext<ApplicationDbContext>
+              (builder =>
+                   builder.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTION_STRING"))
+              );
         }
 
 

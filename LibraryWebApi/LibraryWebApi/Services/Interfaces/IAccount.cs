@@ -8,7 +8,7 @@ namespace LibraryWebApi.Services.Interfaces
 {
     interface IAccount
     {
-        public void Create(Account item);
+        public void Create(string name, string authorizationName);
         public Account Read(string name);
         public Account Read(int id);
         public void Update(Account item);

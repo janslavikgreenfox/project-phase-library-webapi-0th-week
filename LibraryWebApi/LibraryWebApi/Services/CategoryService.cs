@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LibraryWebApi.Databases;
 using LibraryWebApi.Models.Entities;
 
 namespace LibraryWebApi.Services.Interfaces
 {
     public class CategoryService : ICategory
     {
+        private readonly ApplicationDbContext database;
+
+        public CategoryService(ApplicationDbContext database)
+        {
+            this.database = database;
+        }
+
         public void Create(Category item)
         {
-            throw new NotImplementedException();
+            database.CategoriesTable.Add(item);
         }
 
         public void CreateOrUpdate(Category item)

@@ -2,13 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LibraryWebApi.Databases;
 using LibraryWebApi.Models.Entities;
 using LibraryWebApi.Services.Interfaces;
 
 namespace LibraryWebApi.Services
 {
-    public class CategorizationEventSevice : ICategorizationEvent
+    public class CategorizationEventService : ICategorizationEvent
     {
+        private readonly ApplicationDbContext database;
+
+        public CategorizationEventService(ApplicationDbContext database)
+        {
+            this.database = database;
+        }
         public void Create(CategorizationEvent item)
         {
             throw new NotImplementedException();
