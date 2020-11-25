@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LBS2.Databases;
+using LBS2.Services;
+using LBS2.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,6 +25,12 @@ namespace LBS2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddTransient<IAccount, DbAccountService>();
+            services.AddTransient<IAuthorizationLevel, DbAuthorizationLevelService>();
+            services.AddTransient<IBook, DbBookService>();
+            services.AddTransient<IBorrowing, DbBorrowingService>();
+            services.AddTransient<ICategory, DbCategoryServices>();
 
             services.AddDbContext<ApplicationDbContext>
               (builder =>

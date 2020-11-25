@@ -18,6 +18,7 @@ namespace LBS2.Services
         }
         public void Create(string bookTitle, string categoryDescription, string accountName)
         {
+            // TODO Should be dependency injection here 3x
             var dbBookService = new DbBookService(Database);
             var book = dbBookService.Read(bookTitle);
 
