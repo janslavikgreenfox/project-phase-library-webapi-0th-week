@@ -43,6 +43,14 @@ namespace LBS2.Services
             return Database.BorrowingsTbl.ToList();
         }
 
+        public Borrowing ReadByTitle(string bookTitle)
+        {
+            var dbBookService = new DbBookService(Database);
+            var book = dbBookService.Read(bookTitle);
+            return Database.BorrowingsTbl
+                .Where(x=>x.BookId==book.Id).FirstOrDefault();
+        }
+
         public void Update(Borrowing borrowing)
         {
             Database.BorrowingsTbl.Update(borrowing);

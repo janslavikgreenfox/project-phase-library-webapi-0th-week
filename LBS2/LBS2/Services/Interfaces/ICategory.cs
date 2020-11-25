@@ -6,7 +6,7 @@ using LBS2.Entities;
 
 namespace LBS2.Services.Interfaces
 {
-    interface ICategory
+    public interface ICategory
     {
         public void Create(string description);
         public void CreateIfNotExist(string description);

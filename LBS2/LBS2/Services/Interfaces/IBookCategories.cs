@@ -6,7 +6,7 @@ using LBS2.Entities;
 
 namespace LBS2.Services.Interfaces
 {
-    interface IBookCategories
+    public interface IBookCategories
     {
         public void Create(string bookTitle, string categoryDescription, string accountName);
         public List<BookCategory> ReadAll();

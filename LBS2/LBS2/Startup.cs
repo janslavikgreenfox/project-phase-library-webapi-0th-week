@@ -29,20 +29,34 @@ namespace LBS2
             services.AddTransient<IAccount, DbAccountService>();
             services.AddTransient<IAuthorizationLevel, DbAuthorizationLevelService>();
             services.AddTransient<IBook, DbBookService>();
+            services.AddTransient<IBookCategories, DbBookCategoriesService>();
             services.AddTransient<IBorrowing, DbBorrowingService>();
             services.AddTransient<ICategory, DbCategoryServices>();
 
-            services.AddDbContext<ApplicationDbContext>
-              (builder =>
-                   builder.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTION_STRING"))
-              );
+            //BEGIN Database registration - In case of the "In memory" database
 
-            //In case of migration
+            services.AddDbContext<ApplicationDbContext>
+                (options => options.UseInMemoryDatabase("InMemoryDB"));
+
+            //END Database registration - In case of the "In memory" database
+
+            //BEGIN Database registration - In case of the SQL database + no migration
+
+            //services.AddDbContext<ApplicationDbContext>
+            //  (builder =>
+            //       builder.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTION_STRING"))
+            //  );
+
+            //END Database registration - In case of the SQL database + no migration
+
+            //BEGIN Database registration - In case of the SQL Database + during migration
 
             //services.AddDbContext<ApplicationDbContext>
             //    (builder =>
             //        builder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Database=LBS2DB;Trusted_Connection=True")
             //    );
+
+            //END Database registration - In case of the SQL Database + during migration
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

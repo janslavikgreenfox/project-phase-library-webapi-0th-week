@@ -6,7 +6,7 @@ using LBS2.Entities;
 
 namespace LBS2.Services.Interfaces
 {
-    interface IAccount
+    public interface IAccount
     {
         public void Create(string name, string password, string authLevel);
         public void CreateIfNotExist(string name, string password, string authLevel);

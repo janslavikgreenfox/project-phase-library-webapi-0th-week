@@ -17,21 +17,17 @@ namespace LBS2.Services
         {
             Database = database;
         }
-        public void Create(string title, string categoryDescription="")
+        public void Create(string title)
         {
             var book = new Book { Title=title};
-            if (!String.IsNullOrEmpty(categoryDescription))
-            {
-                //TODO add to the category
-            }
 
             Database.BooksTbl.Add(book);
             Database.SaveChanges();
         }
 
-        public void CreateIfNotExist(string title, string categoryDescription="")
+        public void CreateIfNotExist(string title)
         {
-            Create(title,categoryDescription);
+            Create(title);
         }
 
         public void Delete(Book book)
