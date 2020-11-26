@@ -15,7 +15,9 @@ namespace LBS2.Services
 
         public DbAccountService(ApplicationDbContext database)
         {
+            
             Database = database;
+            
         }
         public void Create(string name, string password, string authLevel)
         {
@@ -50,12 +52,18 @@ namespace LBS2.Services
                 .FirstOrDefault();
         }
 
+        public List<Account> ReadAll()
+        {
+            return Database.AccountsTbl.ToList();
+        }
+
         public Account ReadByNameAndPassword(string name, string password)
         {
             return Database.AccountsTbl
-                .Where(account=>(account.Name==name && account.Password==password))
-                .Include(account=>account.LevelOfAuthorization)
+                .Where(account => (account.Name == name && account.Password == password))
+                .Include(account => account.LevelOfAuthorization)
                 .FirstOrDefault();
+
         }
 
         public void Update(Account account)

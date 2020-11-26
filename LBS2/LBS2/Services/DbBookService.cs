@@ -44,6 +44,11 @@ namespace LBS2.Services
                 .FirstOrDefault();
         }
 
+        public List<Book> ReadAll()
+        {
+            return Database.BooksTbl.ToList();
+        }
+
         public void Update(Book book)
         {
             Database.BooksTbl.Update(book);

@@ -12,6 +12,7 @@ namespace LBS2.Services.Interfaces
         public void CreateIfNotExist(string name, string password, string authLevel);
         public Account Read(string name);
         public Account ReadByNameAndPassword(string name, string password);
+        public List<Account> ReadAll();
         public void Update(Account account);
         public void Delete(Account account);
     }

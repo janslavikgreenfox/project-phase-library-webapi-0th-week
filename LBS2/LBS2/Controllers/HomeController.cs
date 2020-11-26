@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using LBS2.DTOs.Requests;
+using LBS2.Entities;
 using LBS2.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -68,6 +69,7 @@ namespace LBS2.Controllers
             {
                 return RedirectToAction("LoginGet");
             }
+
 
             var claims = new List<Claim>
             {

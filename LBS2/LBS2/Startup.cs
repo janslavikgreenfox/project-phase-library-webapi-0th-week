@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using LBS2.Databases;
+using LBS2.DTOs.Mappings;
 using LBS2.Services;
 using LBS2.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -65,6 +67,12 @@ namespace LBS2
                                 options.Cookie.Name = "MyLBS2Cookie";
                                 options.LoginPath = "/home/login";
                         });
+
+            var config = new AutoMapper.MapperConfiguration(
+                c=> { c.AddProfile(new AutoMappersDef()); }
+                );
+            var mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

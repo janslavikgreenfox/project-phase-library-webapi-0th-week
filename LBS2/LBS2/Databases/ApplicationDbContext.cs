@@ -19,8 +19,7 @@ namespace LBS2.Databases
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
-           
-            
+            Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -47,29 +46,49 @@ namespace LBS2.Databases
                 .WithMany(cat => cat.BooksBelongsToCategory)
                 .HasForeignKey(bc => bc.CategoryId);
 
-            //#region DataSeed
 
-            //modelBuilder.Entity<AuthorizationLevel>()
-            //    .HasData(
-            //    new AuthorizationLevel() { Name = "Admin", Id=1 },
-            //    new AuthorizationLevel() { Name = "Librarian", Id=2 },
-            //    new AuthorizationLevel() { Name = "Client", Id=3 }
-            //    );
+            #region DataSeed
 
-            //modelBuilder.Entity<Category>()
-            //    .HasData(
-            //    new Category() { Description = "Scifi", Id=1 },
-            //    new Category() { Description = "History", Id=2 },
-            //    new Category() { Description = "Politics", Id=3 },
-            //    new Category() { Description = "Humor", Id=4 }
-            //    );
+            modelBuilder.Entity<AuthorizationLevel>()
+                .HasData(
+                new AuthorizationLevel() { Name = "Admin", Id = 1 },
+                new AuthorizationLevel() { Name = "Librarian", Id = 2 },
+                new AuthorizationLevel() { Name = "Client", Id = 3 }
+                );
 
-            //modelBuilder.Entity<Account>()
-            //    .HasData(
-            //    new Account() { Name = "Von Neumann", Password = "0123", AuthorizationId = 1 }
-            //    );
+            modelBuilder.Entity<Category>()
+                .HasData(
+                new Category() { Description = "Scifi", Id = 1 },
+                new Category() { Description = "History", Id = 2 },
+                new Category() { Description = "Politics", Id = 3 },
+                new Category() { Description = "Humor", Id = 4 }
+                );
 
-            //#endregion
+            modelBuilder.Entity<Account>()
+                .HasData(
+                new Account() { Id=1, Name = "Von Neumann", Password = "Von Neumann", AuthorizationId = 1 },
+                new Account() { Id=2, Name = "Gutenberg", Password = "Gutenberg", AuthorizationId = 2 },
+                new Account() { Id=3, Name = "Marylin", Password = "Marylin", AuthorizationId = 3 },
+                new Account() { Id=4, Name = "Elvis", Password = "Elvis", AuthorizationId = 3 },
+                new Account() { Id=5, Name = "Michael", Password = "Michael", AuthorizationId = 3 },
+                new Account() { Id=6, Name = "Freddie", Password = "Freddie", AuthorizationId = 3 }
+                );
+
+            modelBuilder.Entity<Book>()
+                .HasData(
+                new Book() { Id=1,Title="Hector Servadac"},
+                new Book() { Id=2, Title="Bible"},
+                new Book() { Id=3, Title="Gilgamesh"}
+                );
+
+            modelBuilder.Entity<BookCategory>()
+                .HasData(
+                new BookCategory { Id=1,BookId=1,CategoryId=1},
+                new BookCategory { Id=2,BookId=2,CategoryId=2},
+                new BookCategory { Id=3,BookId=2,CategoryId=2}
+                );
+
+            #endregion
 
         }
     }
