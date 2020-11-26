@@ -50,6 +50,14 @@ namespace LBS2.Services
                 .FirstOrDefault();
         }
 
+        public Account ReadByNameAndPassword(string name, string password)
+        {
+            return Database.AccountsTbl
+                .Where(account=>(account.Name==name && account.Password==password))
+                .Include(account=>account.LevelOfAuthorization)
+                .FirstOrDefault();
+        }
+
         public void Update(Account account)
         {
             Database.AccountsTbl.Update(account);

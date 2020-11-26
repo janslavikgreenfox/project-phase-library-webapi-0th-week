@@ -57,6 +57,14 @@ namespace LBS2
             //    );
 
             //END Database registration - In case of the SQL Database + during migration
+
+            services.AddAuthentication("CookieAuth")
+                .AddCookie("CookieAuth",
+                            options =>
+                            {
+                                options.Cookie.Name = "MyLBS2Cookie";
+                                options.LoginPath = "/home/login";
+                        });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +76,9 @@ namespace LBS2
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using LBS2.DTOs.Requests;
 using LBS2.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LBS2.Controllers
@@ -32,11 +35,59 @@ namespace LBS2.Controllers
             CategoryService = categoryService;
         }
 
-        [HttpGet("")]
-        public IActionResult Index()
-        {
+        //[HttpGet("")]
+        //public IActionResult Index()
+        //{
 
-            return View();
+        //    return View();
+        //}
+
+        [HttpGet("")]
+        public ActionResult LoginGet(string returnUrl)
+        {
+            TempData["returnUrl"] = returnUrl;
+            return View("Login");
+        }
+
+        [HttpPost("")]
+        public async Task<ActionResult> LoginPost(LoginForm form)
+        {
+            if (form is null)
+            {
+                //TODO error
+                return RedirectToAction("Login");
+            }
+            if (String.IsNullOrEmpty(form.Username)|| String.IsNullOrEmpty(form.Password))
+            {
+                //TODO error
+                return RedirectToAction("Login");
+            }
+
+            var userInDb = AccountService.ReadByNameAndPassword(form.Username, form.Password);
+            if (userInDb is null)
+            {
+                return RedirectToAction("LoginGet");
+            }
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name,userInDb.Name),
+                new Claim(ClaimTypes.Role,userInDb.LevelOfAuthorization.Name)
+            };
+            var identity = new ClaimsIdentity(claims, "CookieAuth",ClaimTypes.Name,ClaimTypes.Role);
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync(principal);
+
+            var returnUrl = TempData["returnUrl"] as string;
+
+            return LocalRedirect(returnUrl ?? "/");
+        }
+
+        public async Task<ActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login");
         }
 
         [HttpGet("/test")]
@@ -75,7 +126,7 @@ namespace LBS2.Controllers
             var borrowing = BorrowingService.ReadByTitle("Hector Servadac");
             BorrowingService.Delete(borrowing);
 
-            return View();
+            return View("Login");
         }
 
     }

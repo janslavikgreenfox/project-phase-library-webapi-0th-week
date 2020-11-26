@@ -47,6 +47,30 @@ namespace LBS2.Databases
                 .WithMany(cat => cat.BooksBelongsToCategory)
                 .HasForeignKey(bc => bc.CategoryId);
 
+            //#region DataSeed
+
+            //modelBuilder.Entity<AuthorizationLevel>()
+            //    .HasData(
+            //    new AuthorizationLevel() { Name = "Admin", Id=1 },
+            //    new AuthorizationLevel() { Name = "Librarian", Id=2 },
+            //    new AuthorizationLevel() { Name = "Client", Id=3 }
+            //    );
+
+            //modelBuilder.Entity<Category>()
+            //    .HasData(
+            //    new Category() { Description = "Scifi", Id=1 },
+            //    new Category() { Description = "History", Id=2 },
+            //    new Category() { Description = "Politics", Id=3 },
+            //    new Category() { Description = "Humor", Id=4 }
+            //    );
+
+            //modelBuilder.Entity<Account>()
+            //    .HasData(
+            //    new Account() { Name = "Von Neumann", Password = "0123", AuthorizationId = 1 }
+            //    );
+
+            //#endregion
+
         }
     }
 }
