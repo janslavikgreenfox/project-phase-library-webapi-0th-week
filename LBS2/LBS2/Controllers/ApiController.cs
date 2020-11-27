@@ -7,6 +7,7 @@ using LBS2.DTOs.Responses;
 using LBS2.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace LBS2.Databases
 {
@@ -51,22 +52,48 @@ namespace LBS2.Databases
         //{
 
         //}
-        [HttpGet("/all-books")]
+        [HttpGet("/book/all")]
         public ActionResult<List<BookResponse>> AllBooksGet()
         {
-            //var book = BookService.Read("Hector Servadac");
-            //var bookResponse = Mapper.Map<BookResponse>(book);
+
             var allBooks = BookService.ReadAll();
             var bookResponse = Mapper.Map<IEnumerable<BookResponse>>(allBooks);
             return Ok(bookResponse);
         }
 
-        [HttpGet("/all-accounts")]
+        [HttpGet("/book")]
+        public ActionResult<BookResponse> BookGet([FromQuery] string title)
+        {
+            if (String.IsNullOrEmpty(title))
+            {
+                return NotFound("The book title is not valid.");
+            }
+            var book = BookService.Read(title);
+            return Ok(Mapper.Map<BookResponse>(book));
+        }
+
+        [HttpGet("/account/all")]
         public ActionResult<List<AccountResponse>> AllAccountsGet()
         {
             var allAccounts = AccountService.ReadAll();
             var accountResponse = Mapper.Map<IEnumerable<AccountResponse>>(allAccounts);
+            var jsonOutput = 
+                JsonConvert.SerializeObject(
+                    accountResponse, Formatting.Indented, 
+                    new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
             return Ok(accountResponse);
+        }
+
+        [HttpGet("/account")]
+        public ActionResult<AccountResponse> AccountGet([FromQuery] string name)
+        {
+            if (String.IsNullOrEmpty(name))
+            {
+                return NotFound("The account name is not valid!");
+            }
+            var account = AccountService.Read(name);
+            var accountResponse = Mapper.Map<AccountResponse>(account);
+            return Ok(Mapper.Map<AccountResponse>(account));
         }
     }
 }

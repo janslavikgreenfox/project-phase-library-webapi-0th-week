@@ -78,7 +78,9 @@ namespace LBS2.Databases
                 .HasData(
                 new Book() { Id=1,Title="Hector Servadac"},
                 new Book() { Id=2, Title="Bible"},
-                new Book() { Id=3, Title="Gilgamesh"}
+                new Book() { Id=3, Title="Gilgamesh"},
+                new Book() { Id=4, Title="Stocheia"},
+                new Book() { Id=5, Title="Apology of Socrates"}
                 );
 
             modelBuilder.Entity<BookCategory>()
@@ -86,6 +88,15 @@ namespace LBS2.Databases
                 new BookCategory { Id=1,BookId=1,CategoryId=1},
                 new BookCategory { Id=2,BookId=2,CategoryId=2},
                 new BookCategory { Id=3,BookId=2,CategoryId=2}
+                );
+
+            modelBuilder.Entity<Borrowing>()
+                .HasData(
+                new Borrowing { Id=1, AccountId=3,BookId=1, WhenBorrowed=DateTime.Now},
+                new Borrowing { Id=2, AccountId=3,BookId=2, WhenBorrowed = DateTime.Now },
+                new Borrowing { Id=3, AccountId=3,BookId=3, WhenBorrowed = DateTime.Now },
+                new Borrowing { Id=4, AccountId=4,BookId=4, WhenBorrowed = DateTime.Now },
+                new Borrowing { Id=5, AccountId=5,BookId=5, WhenBorrowed = DateTime.Now }
                 );
 
             #endregion

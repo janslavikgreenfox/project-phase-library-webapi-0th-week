@@ -8,5 +8,7 @@ namespace LBS2.DTOs.Responses
     public class BookResponse
     {
         public string Title { get; set; }
+        public string WhenBorrowed { get; set; }
+        public string WhoBorrowedName { get; set; }
     }
 }

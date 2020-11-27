@@ -9,6 +9,7 @@ namespace LBS2.DTOs.Responses
     public class AccountResponse
     {
         public string Name { get; set; }
-        public List<Book> BooksBorrowed { get; set; } 
+        public List<string> BooksBorrowedTitles { get; set; } 
+        
     }
 }

@@ -49,12 +49,17 @@ namespace LBS2.Services
             return Database.AccountsTbl
                 .Where(account=>account.Name==name)
                 .Include(account=>account.LevelOfAuthorization)
+                .Include(account=>account.BooksBorrowed)
+                .ThenInclude(borrowing => borrowing.BorrowedBook)
                 .FirstOrDefault();
         }
 
         public List<Account> ReadAll()
         {
-            return Database.AccountsTbl.ToList();
+            return Database.AccountsTbl
+                .Include(account=>account.BooksBorrowed)
+                .ThenInclude(borrowing=>borrowing.BorrowedBook)
+                .ToList();
         }
 
         public Account ReadByNameAndPassword(string name, string password)

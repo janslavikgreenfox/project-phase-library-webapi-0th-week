@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 
 namespace LBS2
 {
@@ -26,7 +27,9 @@ namespace LBS2
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson(
+                    x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                  );
 
             services.AddTransient<IAccount, DbAccountService>();
             services.AddTransient<IAuthorizationLevel, DbAuthorizationLevelService>();
@@ -69,7 +72,7 @@ namespace LBS2
                         });
 
             var config = new AutoMapper.MapperConfiguration(
-                c=> { c.AddProfile(new AutoMappersDef()); }
+                cfg => { cfg.AddProfile(new AutoMappersDef()); }
                 );
             var mapper = config.CreateMapper();
             services.AddSingleton(mapper);

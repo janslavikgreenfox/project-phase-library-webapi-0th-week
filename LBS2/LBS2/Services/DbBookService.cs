@@ -41,12 +41,17 @@ namespace LBS2.Services
             return Database.BooksTbl
                 .Where(book=>book.Title==title)
                 .Include(book=>book.BelongsToCatgegories)
+                .Include(book=>book.Borrowings)
+                .ThenInclude(borrowing=>borrowing.WhoBorrowed)
                 .FirstOrDefault();
         }
 
         public List<Book> ReadAll()
         {
-            return Database.BooksTbl.ToList();
+            return Database.BooksTbl
+                .Include(book => book.Borrowings)
+                .ThenInclude(borrowing => borrowing.WhoBorrowed)
+                .ToList();
         }
 
         public void Update(Book book)
