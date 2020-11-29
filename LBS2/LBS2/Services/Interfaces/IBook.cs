@@ -11,6 +11,7 @@ namespace LBS2.Services.Interfaces
         public void Create(string title);
         public void CreateIfNotExist(string title);
         public Book Read(string title);
+        public Book Read(int bookId);
         public List<Book> ReadAll();
         public void Update(Book book);
         public void Delete(Book book);

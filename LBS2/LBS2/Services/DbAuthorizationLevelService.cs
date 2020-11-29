@@ -31,6 +31,11 @@ namespace LBS2.Services.Interfaces
             };
         }
 
+        public bool IsInDB(string levelName)
+        {
+            return Database.AuthorizationLevelsTbl.Any(x=>x.Name==levelName);
+        }
+
         public AuthorizationLevel Read(string levelName)
         {
             return 

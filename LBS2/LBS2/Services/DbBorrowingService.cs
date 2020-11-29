@@ -16,7 +16,7 @@ namespace LBS2.Services
         {
             Database = database;
         }
-        public void Create(string bookTitle, string accountName)
+        public Borrowing Create(string bookTitle, string accountName)
         {
             // TODO Should be dependency injection here 2x
             var dbBookService = new DbBookService(Database);
@@ -25,11 +25,20 @@ namespace LBS2.Services
             var dbAccountService = new DbAccountService(Database);
             var account = dbAccountService.Read(accountName);
 
-            var borrowing = new Borrowing { WhenBorrowed = DateTime.Now };
+            if(Database.BorrowingsTbl.Any(x=>x.BookId==book.Id))
+            {
+                return null;
+            } 
+            else
+            {
+                var borrowing = new Borrowing { WhenBorrowed = DateTime.Now };
 
-            book.Borrowings.Add(borrowing);
-            account.BooksBorrowed.Add(borrowing);
-            Database.SaveChanges();
+                book.Borrowings.Add(borrowing);
+                account.BooksBorrowed.Add(borrowing);
+                Database.SaveChanges();
+
+                return borrowing;
+            }
         }
 
         public void Delete(Borrowing borrowing)

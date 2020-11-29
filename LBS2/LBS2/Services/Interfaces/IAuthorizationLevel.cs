@@ -8,6 +8,7 @@ namespace LBS2.Services.Interfaces
 {
     public interface IAuthorizationLevel
     {
+        public bool IsInDB(string levelName);
         public void Create(string levelName);
         public void CreateIfNotExist(string levelName);
         public AuthorizationLevel Read(string levelName);

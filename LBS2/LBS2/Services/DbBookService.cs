@@ -46,6 +46,16 @@ namespace LBS2.Services
                 .FirstOrDefault();
         }
 
+        public Book Read(int bookId)
+        {
+            return Database.BooksTbl
+                .Where(book => book.Id == bookId)
+                .Include(book => book.BelongsToCatgegories)
+                .Include(book => book.Borrowings)
+                .ThenInclude(borrowing => borrowing.WhoBorrowed)
+                .FirstOrDefault(); 
+        }
+
         public List<Book> ReadAll()
         {
             return Database.BooksTbl

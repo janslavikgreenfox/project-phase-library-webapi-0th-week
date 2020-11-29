@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LBS2", "LBS2\LBS2.csproj", "{951BFAAF-EDA7-4D53-AF9D-0C8E596D22DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LBS2", "LBS2\LBS2.csproj", "{951BFAAF-EDA7-4D53-AF9D-0C8E596D22DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject2", "XUnitTestProject2\XUnitTestProject2.csproj", "{8AF70EF0-9C40-4062-B04D-2B8E8F3EAFEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{951BFAAF-EDA7-4D53-AF9D-0C8E596D22DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{951BFAAF-EDA7-4D53-AF9D-0C8E596D22DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{951BFAAF-EDA7-4D53-AF9D-0C8E596D22DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AF70EF0-9C40-4062-B04D-2B8E8F3EAFEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AF70EF0-9C40-4062-B04D-2B8E8F3EAFEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AF70EF0-9C40-4062-B04D-2B8E8F3EAFEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AF70EF0-9C40-4062-B04D-2B8E8F3EAFEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

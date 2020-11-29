@@ -54,6 +54,16 @@ namespace LBS2.Services
                 .FirstOrDefault();
         }
 
+        public Account Read(int accountId)
+        {
+            return Database.AccountsTbl
+                .Where(account => account.Id == accountId)
+                .Include(account => account.LevelOfAuthorization)
+                .Include(account => account.BooksBorrowed)
+                .ThenInclude(borrowing => borrowing.BorrowedBook)
+                .FirstOrDefault();
+        }
+
         public List<Account> ReadAll()
         {
             return Database.AccountsTbl
