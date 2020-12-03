@@ -40,8 +40,100 @@ namespace AlgorithmicExercise
 
             Solution(10);
             Solution(20);
-            
 
+            var narcistic = Narcissistic(153);
+
+            var reversed1 = SpinWords("Hey fellow warriors");
+            var reversed2 = SpinWords("This is a test");
+            var reversed3 = SpinWords("This is another test");
+
+            var folded1 = FoldAnAnArray(new int[] { 3, 4, 5 },2);
+            var folded2 = FoldAnAnArray(new int[] { 4, 2, 5, 3, 2, 5, 7 },2);
+
+        }
+
+        public class Item
+        {
+            public int Id { get; set; }
+            public double Assesment { get; set; }
+            public double Price { get; set; }
+            public string Name { get; set; }
+        }
+
+        public static bool IsLessOrEqual(Item leftHand, Item rightHand)
+        {
+            return 
+                (leftHand.Assesment <= rightHand.Assesment && leftHand.Price <= rightHand.Price) 
+                ? true 
+                : false; 
+        }
+        //public static void BubbleSortWithDelegate(Item[] items, Del isLessOrEqual )
+        //{
+
+        //}
+
+
+        public static int[] FoldAnAnArray(int[] input, int n)
+        {
+            
+            if (n==0)
+            {
+                return input;
+            }
+            else
+            {
+                int middle = input.Length / 2;
+                int modulo = input.Length % 2;
+    
+                int[] folded = new int[middle + modulo];
+                for (var i=0; i<middle+modulo; i++)
+                {
+                    folded[i] = input[i + middle]; 
+                }
+                for(var j=0; j < middle; j++)
+                {
+                    folded[j + modulo] += input[j];
+                }
+
+                return FoldAnAnArray(folded,n-1);
+            }
+        } 
+
+        public static string SpinWords(string input)
+        {
+           string[] words = input.Split(" ");
+            for (int index = 0; index < words.Length; index++)
+
+            {
+                if (words[index].Length >= 5)
+                {
+                    words[index] = Reverse(words[index]);
+                }
+            }
+            return String.Join(" ", words);
+        }
+        public static string Reverse(string input)
+        {
+            string reversed = String.Empty;
+            for (int i = input.Length-1; i >= 0; i--)
+            {
+                reversed += input[i];
+            }
+            return reversed;
+        }
+
+        public static bool Narcissistic(int number)
+        {
+            int x = number;
+            int sum = 0;
+            int exponent = Convert.ToInt32(Math.Floor(Math.Log10(number)))+1;
+            while (x > 0)
+            {
+                var y = x % 10;
+                sum += Convert.ToInt32(Math.Pow(y, exponent));
+                x = x / 10;
+            }
+            return sum==number;
         }
 
         public static int Solution(int value)
